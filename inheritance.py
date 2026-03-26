@@ -1,4 +1,5 @@
 class Animal:
+
     def __init__(self, name, sound):
         self.name = name
         self.sound = sound
@@ -24,6 +25,26 @@ class Cat(Animal):
 
     def speak(self):  # override parent method
         return f"{self.name} says Purrr... (not just Meow)"
+    
+class bird(Animal):
+    def __init__(self, name, can_fly):
+        super().__init__(name, "Tweet")
+        self.can_fly = can_fly
+
+    def fly(self):
+        if self.can_fly:
+            return f"{self.name} is flying!"
+        else:
+            return f"{self.name} cannot fly."
+        
+    def __str__(self):
+        return f"bird({self.name})"
+
+    def speak(self):
+        return f"{self.name} says {self.sound} and {'can fly' if self.can_fly else 'cannot fly'}"
+    
+b = bird("Tweety", True)
+print(b.speak())  # bird's own speak method
 
 d = Dog("Bruno", "Labrador")
 c = Cat("Whiskers", True)
@@ -37,16 +58,7 @@ for a in animals:
     print(a)        # __str__ method from Animal
     print(a.speak()) # speak method, overridden in Cat but not in Dog
 
-class bird(Animal):
-    def __init__(self, name, can_fly):
-        super().__init__(name, "Tweet")
-        self.can_fly = can_fly
 
-    def speak(self):
-        return f"{self.name} says {self.sound} and {'can fly' if self.can_fly else 'cannot fly'}"
-    
-b = bird("Tweety", True)
-print(b.speak())  # bird's own speak method
 
 print(isinstance(d, Animal))  # True, Dog is a subclass of Animal
 print(isinstance(c, Dog))     # False, Cat is not a Dog
